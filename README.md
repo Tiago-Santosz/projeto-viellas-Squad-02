@@ -1,7 +1,7 @@
 # Projeto Viellas - Squad 2
 
 
-##Techs 
+## Techs 
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
@@ -28,10 +28,54 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Structure
+```
+src/
+├── auth/
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   └── strategies/
+│       └── jwt.strategy.ts
+│
+├── users/
+│   ├── dto/
+│   │   └── create-user.dto.ts
+│   ├── entities/
+│   │   └── user.entity.ts
+│   ├── users.controller.ts
+│   ├── users.service.ts
+│   └── users.module.ts
+│
+├── admins/
+│   ├── dto/
+│   │   └── create-admin.dto.ts
+│   ├── entities/
+│   │   └── admin.entity.ts
+│   ├── admins.controller.ts
+│   ├── admins.service.ts
+│   └── admins.module.ts
+│
+├── common/
+│   └── enums/
+│       └── enum-position.enum.ts
+│
+├── main.ts
+└── app.module.ts
+```
 
 ## Project setup
+Just start by clonning the repository
+```bash
+$ git clone https://github.com/Tiago-Santosz/projeto-viellas-Squad-02.git
+```
 
+Then get into the folder
+```bash
+$ cd projeto-viellas-Squad-02
+```
+
+Run this command to install the dependencies
 ```bash
 $ npm install
 ```
