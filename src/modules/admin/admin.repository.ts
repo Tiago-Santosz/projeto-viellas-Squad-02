@@ -1,8 +1,11 @@
 import { Repository } from "typeorm";
 import { Admin } from "./entities/admin.entity";
+import { InjectRepository } from "@nestjs/typeorm";
 
 export class AdminRepository {
-    constructor(private readonly adminRepository: Repository<Admin>) {}
+    constructor(
+        @InjectRepository(Admin)
+        private readonly adminRepository: Repository<Admin>) {}
 
     async create(admin: Admin): Promise<Admin> {
         return this.adminRepository.save(admin);
