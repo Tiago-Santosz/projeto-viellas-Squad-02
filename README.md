@@ -31,37 +31,61 @@
 ## Structure
 ```
 src/
-├── auth/
-│   ├── auth.controller.ts
-│   ├── auth.module.ts
-│   ├── auth.service.ts
-│   └── strategies/
-│       └── jwt.strategy.ts
 │
-├── users/
-│   ├── dto/
-│   │   └── create-user.dto.ts
-│   ├── entities/
-│   │   └── user.entity.ts
-│   ├── users.controller.ts
-│   ├── users.service.ts
-│   └── users.module.ts
+├── infra/
+│   └── database.module.ts         # Configuração do módulo de banco de dados
 │
-├── admins/
-│   ├── dto/
-│   │   └── create-admin.dto.ts
-│   ├── entities/
-│   │   └── admin.entity.ts
-│   ├── admins.controller.ts
-│   ├── admins.service.ts
-│   └── admins.module.ts
+├── modules/                       # Módulos da aplicação organizados por domínio
+│   ├── admin/
+│   │   ├── entities/
+│   │   │   └── admin.entity.ts    # Entidade Admin (herda de User)
+│   │   ├── admin.controller.ts    # Controller de Admin
+│   │   ├── admin.module.ts        # Módulo do domínio Admin
+│   │   ├── admin.repository.ts    # Repositório customizado de Admin
+│   │   └── admin.service.ts       # Lógica de negócio para Admin
+│   │
+│   ├── common/
+│   │   └── enums/                 # Enums compartilhados entre os módulos
+│   │       ├── enum-category.enum.ts
+│   │       ├── enum-license.enum.ts
+│   │       ├── enum-paymentMethod.enum.ts
+│   │       ├── enum-planType.enum.ts
+│   │       └── enum-position.enum.ts
+│   │
+│   ├── customers/
+│   │   └── entities/
+│   │       └── customer.entity.ts # Entidade Customer com relacionamentos
+│   │
+│   ├── photo/
+│   │   ├── entities/
+│   │   │   └── photo.entity.ts    # Entidade Photo
+│   │   └── photo.module.ts        # Módulo de fotos
+│   │
+│   ├── purchase/
+│   │   └── entities/
+│   │       └── purchase.entity.ts # Entidade Purchase
+│   │
+│   ├── users/
+│   │   ├── dto/
+│   │   │   ├── login.dto.ts       # DTO para login
+│   │   │   ├── register.dto.ts    # DTO para registro
+│   │   │   └── update.dto.ts      # DTO para atualização de usuário
+│   │   ├── entities/
+│   │   │   └── user.entity.ts     # Entidade User
+│   │   ├── tests/
+│   │   │   ├── user.controller.spec.ts
+│   │   │   └── user.service.spec.ts # Testes unitários de User
+│   │   ├── user.controller.ts
+│   │   ├── user.module.ts
+│   │   ├── user.repository.ts
+│   │   └── user.service.ts
 │
-├── common/
-│   └── enums/
-│       └── enum-position.enum.ts
-│
-├── main.ts
-└── app.module.ts
+├── app.controller.spec.ts         # Teste do AppController (padrão Nest)
+├── app.controller.ts              # Controller principal da aplicação
+├── app.module.ts                  # Módulo raiz
+├── app.service.ts                 # Serviço principal
+└── main.ts                        # Bootstrap da aplicação NestJS
+
 ```
 
 ## Project setup
