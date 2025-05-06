@@ -10,7 +10,11 @@ export class User {
     email: string;
     @Column({ type: 'varchar', length: 255 })
     password: string;
-
+    @Column({ default: false })
+    isVerified: boolean;
+    @Column({default: false})
+    isDeleted: boolean;
+    
     constructor(name: string, email: string, password: string) {
         this.name = name;
         this.email = email;
