@@ -1,4 +1,4 @@
-import { Position } from "src/modules/common/enums/enum-position.enum";
+import { EnumPosition } from "src/modules/common/enums/enum-position.enum";
 import { User } from "src/modules/users/entities/user.entity";
 import { ChildEntity, Column, Entity } from "typeorm";
 
@@ -6,7 +6,7 @@ import { ChildEntity, Column, Entity } from "typeorm";
 @ChildEntity()
 export class Admin extends User {
   @Column()
-  position: Position;
+  position: EnumPosition;
 
   @Column("simple-array")
   permissions: string[];

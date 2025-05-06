@@ -1,4 +1,4 @@
-export enum Position {
+export enum EnumPosition {
     Manager = 'Manager',
     Developer = 'Developer',
     Designer = 'Designer',
