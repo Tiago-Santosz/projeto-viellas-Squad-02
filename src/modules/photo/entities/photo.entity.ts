@@ -24,11 +24,11 @@ import {
     @Column()
     description: string;
   
-    @Column('simple-json', { nullable: true }) // Armazena como JSON no banco
+    @Column('simple-json', { nullable: true }) 
     data: Record<string, string>;
   
     @Column()
-    categoria: EnumCategory;
+    category: EnumCategory;
   
     @Column()
     date: Date;

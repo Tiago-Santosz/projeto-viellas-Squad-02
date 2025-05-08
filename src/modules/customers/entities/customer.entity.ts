@@ -5,13 +5,16 @@ import {
     OneToMany,
     ManyToOne,
     JoinColumn,
+    ChildEntity,
   } from 'typeorm';
   import { Plan } from './plan.entity';
   import { Photo } from 'src/modules/photo/entities/photo.entity';
   import { Purchase } from 'src/modules/purchase/entities/purchase.entity';
+import { User } from 'src/modules/users/entities/user.entity';
   
   @Entity()
-  export class Customer {
+  @ChildEntity()
+  export class Customer extends User{
     @PrimaryColumn()
     document: string;
   
