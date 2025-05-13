@@ -6,19 +6,23 @@ import {
     ManyToOne,
     JoinColumn,
     ChildEntity,
+    OneToOne,
   } from 'typeorm';
   import { Plan } from './plan.entity';
-  import { Photo } from 'src/modules/photo/entities/photo.entity';
-  import { Purchase } from 'src/modules/purchase/entities/purchase.entity';
-import { User } from 'src/modules/users/entities/user.entity';
+  import { Photo } from '../../photo/entities/photo.entity';
+  import { Purchase } from '../../purchase/entities/purchase.entity';
+import { User } from '../../users/entities/user.entity';
   
   @Entity()
-  @ChildEntity()
   export class Customer extends User{
     @PrimaryColumn()
     document: string;
-  
-    @ManyToOne(() => Plan, { eager: true }) // eager = carrega junto automaticamente
+    
+    @OneToOne(() => User, { eager: true, cascade: true })
+    @JoinColumn()
+    user: User;
+
+    @ManyToOne(() => Plan, { eager: true }) 
     @JoinColumn()
     subscriptionPlan: Plan;
   
@@ -31,4 +35,4 @@ import { User } from 'src/modules/users/entities/user.entity';
     @OneToMany(() => Photo, photo => photo.downloadedBy)
     photosDownloaded: Photo[];
   }
-  
+ 

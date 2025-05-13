@@ -1,9 +1,18 @@
+import { IsEmail, IsString, MinLength } from 'class-validator';
 
-export interface LoginDto {
-    email: string;
-    password: string;
+export class LoginDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @MinLength(6)
+  password: string;
 }
-export interface LoginResponseDto {
-    accessToken: string;
-    refreshToken: string;
+
+export class LoginResponseDto {
+  @IsString()
+  accessToken: string;
+
+  @IsString()
+  refreshToken: string;
 }
