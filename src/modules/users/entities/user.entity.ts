@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, Table } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
 
 @Entity()
 export class User {
@@ -12,9 +12,8 @@ export class User {
     password: string;
     @Column({ default: false })
     isVerified: boolean;
-    @Column({default: false})
+    @Column({ default: false })
     isDeleted: boolean;
-    
     constructor(name: string, email: string, password: string) {
         this.name = name;
         this.email = email;

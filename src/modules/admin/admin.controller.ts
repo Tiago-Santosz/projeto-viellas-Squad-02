@@ -4,5 +4,15 @@ import { Admin } from "./entities/admin.entity";
 
 @Controller('admins')
 export class AdminController {
-    
+    /*
+    Aprovar foto
+
+    Reprovar foto
+
+    Remover foto
+
+    Remover usuário
+
+    visualizar dashboard
+    */
 }

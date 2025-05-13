@@ -1,9 +1,10 @@
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post, Put, RequestMapping } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { UserService } from "./user.service";
-import { User } from "./entities/user.entity";
 import { RegisterDto } from "./dto/register.dto";
 import { UpdateUserDto } from "./dto/update.dto";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
     constructor(private userService: UserService) {}

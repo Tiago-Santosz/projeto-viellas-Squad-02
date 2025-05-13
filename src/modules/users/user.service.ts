@@ -9,22 +9,20 @@ import { UpdateUserDto, UpdateUserResponseDto } from "./dto/update.dto";
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
     async createUser(user: RegisterDto): Promise<ReturnUserDto> {
-        const isValidEmail = await this.validateEmail(user.email);
-        if(!isValidEmail) {
-            throw new BadRequestException("Invalid email format");
-        };       
-        if(!this.validatePassword(user.password)){
-            throw new BadRequestException("Invalid password format");
+        const validEmail = await this.validateEmail(user.email);
+        const isExistingUser = await this.validateExistingUser(user.email);
+        if(this.validatePassword(user.password)){
+            const hashedPassword = await this.hashPassword(user.password);
+    
+            const newUser = new User(user.name, user.email, hashedPassword);
+            const addedUser = await this.userRepository.create(newUser);
+            return {
+                id: addedUser.id,
+                name: addedUser.name,
+                email: addedUser.email
+            };
         }
-        const hashedPassword = await this.hashPassword(user.password);
-
-        const newUser = new User(user.name, user.email, hashedPassword);
-        const addedUser = await this.userRepository.create(newUser);
-        return {
-            id: addedUser.id,
-            name: addedUser.name,
-            email: addedUser.email
-        };
+        throw new BadRequestException("An error occurred");
     }
     
     async updateUser(user: User): Promise<UpdateUserResponseDto> {
@@ -61,21 +59,26 @@ export class UserService {
 
     // Validation methods
     // These methods are used to validate the email and password format
-    async validateEmail(email: string): Promise<boolean> {
+    async validateEmail(email: string): Promise<string> {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            return false;
+            throw new BadRequestException("Invalid email format");
         }
+        return email;
+    }
+
+    async validateExistingUser(email: string): Promise<string> {
         const existingUser = await this.userRepository.findByEmail(email);
         if (existingUser) {
-            return false;
+            throw new BadRequestException("Invalid email format");
         }  
-        return true;
+        return email
     }
+
     validatePassword(password: string): boolean {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        if (!passwordRegex.test(password)) {
-            return false;
+        if (!passwordRegex.test(password)) {    
+            throw new BadRequestException("Invalid password format");
         }
         return true;
     }

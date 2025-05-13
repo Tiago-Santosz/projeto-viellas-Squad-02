@@ -10,7 +10,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">This Project used NestJS as principal framework, so here come some NestJS infos:</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -23,8 +23,11 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+<p align="center"> We also used docker for database, and Swagger for documentation.</p>
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg" width="350" alt="Nest Logo" /></a>
+</p>
 
 ## Description
 
@@ -32,59 +35,69 @@
 ```
 src/
 │
-├── infra/
-│   └── database.module.ts         # Configuração do módulo de banco de dados
+├── infra/                          # Infraestrutura e configurações base
+│   └── auth/                       # Módulo de autenticação
+│       ├── tests/                 # Testes relacionados à autenticação
+│       ├── auth.controller.ts     # Controller de autenticação
+│       ├── auth.guard.ts          # Guardas de rota
+│       ├── auth.module.ts         # Módulo de autenticação
+│       ├── auth.service.ts        # Serviço de autenticação
+│       └── constants.ts           # Constantes do módulo
 │
-├── modules/                       # Módulos da aplicação organizados por domínio
-│   ├── admin/
-│   │   ├── entities/
-│   │   │   └── admin.entity.ts    # Entidade Admin (herda de User)
-│   │   ├── admin.controller.ts    # Controller de Admin
-│   │   ├── admin.module.ts        # Módulo do domínio Admin
-│   │   ├── admin.repository.ts    # Repositório customizado de Admin
-│   │   └── admin.service.ts       # Lógica de negócio para Admin
+├── modules/                       # Domínio da aplicação (DDD)
+│   ├── admin/                     # Módulo Admin
+│   │   ├── entities/              # Entidades relacionadas
+│   │   ├── admin.controller.ts
+│   │   ├── admin.module.ts
+│   │   ├── admin.repository.ts
+│   │   └── admin.service.ts
 │   │
-│   ├── common/
-│   │   └── enums/                 # Enums compartilhados entre os módulos
-│   │       ├── enum-category.enum.ts
-│   │       ├── enum-license.enum.ts
-│   │       ├── enum-paymentMethod.enum.ts
-│   │       ├── enum-planType.enum.ts
-│   │       └── enum-position.enum.ts
+│   ├── common/                    # Recursos compartilhados
+│   │   └── enums/                 # Enums utilizados globalmente
 │   │
-│   ├── customers/
-│   │   └── entities/
-│   │       └── customer.entity.ts # Entidade Customer com relacionamentos
+│   ├── customers/                 # Módulo Customer
+│   │   ├── dto/                   # Data Transfer Objects
+│   │   ├── entities/              # Entidades relacionadas
+│   │   ├── tests/                 # Testes do módulo
+│   │   ├── customer.controller.ts
+│   │   ├── customer.module.ts
+│   │   ├── customer.repository.ts
+│   │   └── customer.service.ts
 │   │
-│   ├── photo/
-│   │   ├── entities/
-│   │   │   └── photo.entity.ts    # Entidade Photo
-│   │   └── photo.module.ts        # Módulo de fotos
+│   ├── photo/                     # Módulo Photo
+│   │   ├── dto/                   # DTOs
+│   │   ├── entities/              # Entidades
+│   │   ├── tests/                 # Testes
+│   │   ├── photo.controller.ts
+│   │   ├── photo.module.ts
+│   │   ├── photo.repository.ts
+│   │   └── photo.service.ts
 │   │
-│   ├── purchase/
-│   │   └── entities/
-│   │       └── purchase.entity.ts # Entidade Purchase
+│   ├── purchase/                  # Módulo Purchase
+│   │   ├── dto/                   # DTOs
+│   │   ├── purchase.module.ts
+│   │   ├── purchase.repository.ts
+│   │   └── purchase.service.ts
 │   │
-│   ├── users/
-│   │   ├── dto/
-│   │   │   ├── login.dto.ts       # DTO para login
-│   │   │   ├── register.dto.ts    # DTO para registro
-│   │   │   └── update.dto.ts      # DTO para atualização de usuário
-│   │   ├── entities/
-│   │   │   └── user.entity.ts     # Entidade User
-│   │   ├── tests/
-│   │   │   ├── user.controller.spec.ts
-│   │   │   └── user.service.spec.ts # Testes unitários de User
-│   │   ├── user.controller.ts
-│   │   ├── user.module.ts
-│   │   ├── user.repository.ts
-│   │   └── user.service.ts
+│   └── users/                     # Módulo User
+│       ├── dto/                   # DTOs
+│       ├── entities/              # Entidades
+│       ├── tests/                 # Testes
+│       ├── user.controller.ts
+│       ├── user.module.ts
+│       ├── user.repository.ts
+│       └── user.service.ts
 │
-├── app.controller.spec.ts         # Teste do AppController (padrão Nest)
-├── app.controller.ts              # Controller principal da aplicação
-├── app.module.ts                  # Módulo raiz
+├── database.module.ts             # Módulo global de banco de dados
+├── main.ts                        # Entry point da aplicação
+├── app.module.ts                  # Módulo principal
+├── app.controller.ts              # Controller principal
 ├── app.service.ts                 # Serviço principal
-└── main.ts                        # Bootstrap da aplicação NestJS
+│
+├── app.controller.spec.ts         # Teste do controller principal
+├── app.e2e-spec.ts                # Testes end-to-end
+├── jest.config.json               # Configuração do Jest
+└── .env                           # Variáveis de ambiente
 
 ```
 
@@ -130,42 +143,42 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Deployment
+### Our test coverage:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+| File                            | % Stmts  | % Branch | % Funcs | % Lines | Uncovered Line #s       |
+|----------------------------------|----------|----------|---------|---------|-------------------------|
+| **All files**                    | <span style="color: yellow;">57.08</span>   | <span style="color: yellow;">61.53</span>    | <span style="color: yellow;">41.22</span>   | <span style="color: yellow;">58.12</span>   |                         |
+| **src**                           | <span style="color: red;">41.93</span>   | <span style="color: red;">0</span>        | <span style="color: green;">75</span>      | <span style="color: red;">36</span>      |                         |
+| &nbsp;&nbsp;app.controller.ts    | <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;app.module.ts        | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: red;">0</span>       | 1-17                    |
+| &nbsp;&nbsp;app.service.ts       | <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;main.ts              | <span style="color: red;">0</span>       | <span style="color: red;">0</span>        | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-8                     |
+| **src/infra**                    | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       |                         |
+| &nbsp;&nbsp;database.module.ts   | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-28                    |
+| **src/infra/auth**               | <span style="color: yellow;">63.15</span>   | <span style="color: yellow;">37.5</span>     | <span style="color: yellow;">62.5</span>    | <span style="color: yellow;">61.22</span>   |                         |
+| &nbsp;&nbsp;auth.controller.ts   | <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;auth.guard.ts        | <span style="color: red;">33.33</span>   | <span style="color: red;">0</span>        | <span style="color: red;">0</span>       | <span style="color: yellow;">25</span>      | 14-40                   |
+| &nbsp;&nbsp;auth.module.ts       | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: red;">0</span>       | 2-22                    |
+| &nbsp;&nbsp;auth.service.ts      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;constants.ts         | <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| **src/modules/admin**            | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       |                         |
+| &nbsp;&nbsp;admin.controller.ts  | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: red;">0</span>       | 1-6                     |
+| &nbsp;&nbsp;admin.module.ts      | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 2-18                    |
+| &nbsp;&nbsp;admin.repository.ts  | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-27                    |
+| &nbsp;&nbsp;admin.service.ts     | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-22                    |
+| **src/modules/admin/entities**  | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       |                         |
+| &nbsp;&nbsp;admin.entity.ts      | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-17                    |
+| **src/modules/common/enums**    | <span style="color: yellow;">57.69</span>   | <span style="color: yellow;">60</span>       | <span style="color: yellow;">60</span>      | <span style="color: yellow;">57.69</span>   |                         |
+| &nbsp;&nbsp;enum-category.enum.ts| <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;enum-license.enum.ts | <span style="color: red;">0</span>       | <span style="color: red;">0</span>        | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-5                     |
+| &nbsp;&nbsp;enum-paymentMethod.enum.ts | <span style="color: green;">100</span> | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;enum-planType.enum.ts| <span style="color: green;">100</span>     | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">100</span>     |                         |
+| &nbsp;&nbsp;enum-position.enum.ts| <span style="color: red;">0</span>       | <span style="color: red;">0</span>        | <span style="color: red;">0</span>       | <span style="color: red;">0</span>       | 1-6                     |
+| **src/modules/customers**        | <span style="color: green;">68.96</span>   | <span style="color: green;">100</span>      | <span style="color: yellow;">57.14</span>   | <span style="color: green;">68</span>      |                         |
+| &nbsp;&nbsp;customer.controller.ts| <span style="color: green;">92.85</span>  | <span style="color: green;">100</span>      | <span style="color: green;">75</span>      | <span style="color: green;">91.66</span>   | 40                      |
+| &nbsp;&nbsp;customer.module.ts   | <span style="color: red;">0</span>       | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: red;">0</span>       | 1-15                    |
+| &nbsp;&nbsp;customer.repository.ts| <span style="color: yellow;">58.33</span>  | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: yellow;">50</span>      | 12-28                   |
+| &nbsp;&nbsp;customer.service.ts  | <span style="color: green;">90.9</span>    | <span style="color: green;">100</span>      | <span style="color: green;">100</span>     | <span style="color: green;">90</span>      | 42-43                   |
+| **src/modules/customers/dto**   | <span style="color: yellow;">75</span>      | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: yellow;">75</span>      |                         |
+| &nbsp;&nbsp;create.dto.ts        | <span style="color: green;">83.33</span>   | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: green;">83.33</span>   | 14                      |
+| &nbsp;&nbsp;update.dto.ts        | <span style="color: yellow;">71.42</span>   | <span style="color: green;">100</span>      | <span style="color: red;">0</span>       | <span style="color: yellow;">71.42</span>   | 10,15,20,25             |
