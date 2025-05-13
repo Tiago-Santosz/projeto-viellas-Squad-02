@@ -6,6 +6,7 @@ import {
     ManyToOne,
     JoinColumn,
     ChildEntity,
+    OneToOne,
   } from 'typeorm';
   import { Plan } from './plan.entity';
   import { Photo } from '../../photo/entities/photo.entity';
@@ -13,11 +14,14 @@ import {
 import { User } from '../../users/entities/user.entity';
   
   @Entity()
-  @ChildEntity()
   export class Customer extends User{
     @PrimaryColumn()
     document: string;
-  
+    
+    @OneToOne(() => User, { eager: true, cascade: true })
+    @JoinColumn()
+    user: User;
+
     @ManyToOne(() => Plan, { eager: true }) 
     @JoinColumn()
     subscriptionPlan: Plan;
@@ -31,4 +35,4 @@ import { User } from '../../users/entities/user.entity';
     @OneToMany(() => Photo, photo => photo.downloadedBy)
     photosDownloaded: Photo[];
   }
-  
+ 

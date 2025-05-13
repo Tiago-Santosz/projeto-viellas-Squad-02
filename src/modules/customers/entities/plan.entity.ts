@@ -1,5 +1,6 @@
 import { EnumPlanType } from '../../common/enums/enum-planType.enum';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Customer } from './customer.entity';
 
 @Entity()
 export class Plan {
@@ -14,4 +15,8 @@ export class Plan {
 
   @Column('float')
   price: number;
+
+  @OneToMany(() => Customer, customer => customer.subscriptionPlan)
+  customer: Customer;
+
 }

@@ -1,8 +1,8 @@
-import { CustomerService } from './customer.service';
-import { CustomerRepository } from './customer.repository';
+import { CustomerService } from '../customer.service';
+import { CustomerRepository } from '../customer.repository';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { CreateCustomerDto } from './dto/create.dto';
-import { UpdateCustomerDto } from './dto/update.dto';
+import { CreateCustomerDto } from '../dto/create.dto';
+import { UpdateCustomerDto } from '../dto/update.dto';
 
 describe('CustomerService', () => {
   let service: CustomerService;
