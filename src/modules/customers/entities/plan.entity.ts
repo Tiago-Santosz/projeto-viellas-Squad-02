@@ -1,4 +1,4 @@
-import { EnumPlanType } from 'src/modules/common/enums/enum-planType.enum';
+import { EnumPlanType } from '../../common/enums/enum-planType.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

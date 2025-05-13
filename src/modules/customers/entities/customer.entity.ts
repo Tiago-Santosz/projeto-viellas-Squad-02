@@ -8,9 +8,9 @@ import {
     ChildEntity,
   } from 'typeorm';
   import { Plan } from './plan.entity';
-  import { Photo } from 'src/modules/photo/entities/photo.entity';
-  import { Purchase } from 'src/modules/purchase/entities/purchase.entity';
-import { User } from 'src/modules/users/entities/user.entity';
+  import { Photo } from '../../photo/entities/photo.entity';
+  import { Purchase } from '../../purchase/entities/purchase.entity';
+import { User } from '../../users/entities/user.entity';
   
   @Entity()
   @ChildEntity()
@@ -18,7 +18,7 @@ import { User } from 'src/modules/users/entities/user.entity';
     @PrimaryColumn()
     document: string;
   
-    @ManyToOne(() => Plan, { eager: true }) // eager = carrega junto automaticamente
+    @ManyToOne(() => Plan, { eager: true }) 
     @JoinColumn()
     subscriptionPlan: Plan;
   

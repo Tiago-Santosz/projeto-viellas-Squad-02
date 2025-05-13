@@ -4,8 +4,8 @@ import {
     PrimaryGeneratedColumn,
     ManyToOne,
   } from 'typeorm';
-  import { EnumCategory } from 'src/modules/common/enums/enum-category.enum';
-  import { Customer } from 'src/modules/customers/entities/customer.entity';
+  import { EnumCategory } from '../../common/enums/enum-category.enum';
+  import { Customer } from '../../customers/entities/customer.entity';
   
   @Entity()
   export class Photo {

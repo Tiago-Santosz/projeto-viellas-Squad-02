@@ -4,9 +4,9 @@ import {
     PrimaryGeneratedColumn,
     ManyToOne,
   } from 'typeorm';
-  import { EnumPlanType } from 'src/modules/common/enums/enum-planType.enum';
-  import { Customer } from 'src/modules/customers/entities/customer.entity';
-  import { EnumPaymentMethod } from 'src/modules/common/enums/enum-paymentMethod.enum';
+  import { EnumPlanType } from '../../common/enums/enum-planType.enum';
+  import { Customer } from '../../customers/entities/customer.entity';
+  import { EnumPaymentMethod } from '../../common/enums/enum-paymentMethod.enum';
   
   @Entity()
   export class Purchase {

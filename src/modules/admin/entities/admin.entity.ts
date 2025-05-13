@@ -1,5 +1,5 @@
-import { EnumPosition } from "src/modules/common/enums/enum-position.enum";
-import { User } from "src/modules/users/entities/user.entity";
+import { EnumPosition } from "../../common/enums/enum-position.enum";
+import { User } from "../../users/entities/user.entity";
 import { ChildEntity, Column, Entity } from "typeorm";
 
 @Entity()
